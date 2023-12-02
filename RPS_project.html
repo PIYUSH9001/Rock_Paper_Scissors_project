@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPS Project 1.0</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
+        .sect{
+            height:100vh;
+            width:100vw;
+            background-color: black;
+            padding:15px;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .content{
+            /* display: flex; */
+            background-color:yellow;
+            height:300px;
+            width:300px;
+            padding:10px;
+            margin:10px;
+            border-radius: 20px;
+            box-sizing: content-box;
+        }
+        .btn_cont{
+            padding:10px;
+            margin:10px;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #btn{
+            cursor: pointer;
+            padding:15px;
+            margin:5px;
+            background-color: white;
+            border-radius: 5px;
+            border:none;
+            font-weight: bold;
+            width: 300px;
+            border-radius: 35px;
+        }
+        .options{
+            display:flex;
+            justify-content: center;
+            height:80px;
+            width:95%;
+            margin:6px 5px 10px 5px;
+            background-color: white;
+            cursor: pointer;
+            border-radius: 30px;
+            /* border:2px solid ; */
+        }
+        .opponent{
+            background-color: yellow;
+            height:100px;
+            width:300px;
+            padding:10px;
+            margin:10px;
+            border-radius: 20px;
+            box-sizing: content-box;
+            padding-bottom: 30px;
+        }
+        .oppo_img{
+            height:100%;
+            width:100px;
+        }
+        #result{
+            color:white;
+            font-weight: bold; 
+            padding:4px;
+            margin:3px;     
+            text-align: center;  
+            font-size: 35px;
+            border-radius: 30px;    
+        }
+    </style>
+</head>
+<body>
+    <section class="sect">
+        <div class="content">
+            <h3 style="text-align: center;color:black;cursor: default;">SELECT AN OPTION</h3>
+            <div class="options" id = "scissors"><img src="scissors.jpg" alt=""></div>
+            <div class="options" id = "paper"><img src="paper.jpg" alt="" ></div>
+            <div class="options" id = "rock"><img src="rock.jpg" alt="" ></div>
+        </div>
+        <div class="opponent">
+            <h3 style="text-align: center;color:black;cursor: default;">OPPONENT</h3>
+            <div class="options" style="cursor: default;" id="oppo_opt">
+                <img src="https://static.vecteezy.com/system/resources/previews/012/762/853/original/question-mark-silhouette-in-simple-style-illustration-icon-question-symbol-for-print-and-design-quiz-and-exam-concept-isolated-element-on-a-white-background-graphic-sign-ask-and-fqa-vector.jpg" alt="" id="oppo_img">
+            </div>
+            <h3 id="result"></h3>
+        </div>
+        <div class="btn_cont">
+            <button id="btn">
+            PLAY
+            </button>
+        </div>
+    </section>
+    <script>
+        // 1 IS FOR SCISSORS
+        // 2 IS FOR PAPER 
+        // 3 IS FOR ROCK
+        let scissors = document.querySelector('#scissors');
+        let paper = document.querySelector('#paper');
+        let rock = document.querySelector('#rock');
+        let btn = document.querySelector('#btn');
+        let sci_id,paper_id,rock_id = false;
+        let testor = false;
+        let opponent = document.querySelector('#oppo_opt');
+        let oppo_img = document.querySelector('#oppo_img');
+        let oppo = document.querySelector('.opponent');
+        let result = document.querySelector('#result');
+        function selectsci(){
+            rock.style.border = "none";
+            paper.style.border = "none";
+            scissors.style.border = "2px solid black";
+            testor = true;
+            sci_id = true;
+            paper_id,rock_id = false;
+        }
+        function selectrock(){
+            scissors.style.border = "none";
+            paper.style.border = "none";
+            rock.style.border = "2px solid black";
+            testor = true;
+            rock_id = true;
+            paper_id,sci_id = false;
+        }
+        function selectpaper(){
+            scissors.style.border = "none";
+            rock.style.border = "none";
+            paper.style.border = "2px solid black";
+            testor = true;
+            paper_id = true;
+            sci_id,rock_id = false;
+        }
+        function noborder(){
+            paper.style.border = "none";
+            scissors.style.border = "none";
+            rock.style.border = "none";
+            testor = false;
+        }
+        function getRndInteger(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) ) + min;
+        }
+        function play_game(){
+            let ran = getRndInteger(1,3);
+            console.log(ran);
+            if(ran == 1 && sci_id == true){
+                {
+                    // DRAW
+                    oppo_img.src ="scissors.jpg";
+                    result.innerHTML = "DRAW!";
+                    oppo.style.height = "150px";
+                    result.style.color = "white";
+                    result.style.backgroundColor = "blue";
+                }
+            }
+            else if(ran == 1 && rock_id == true){
+                {
+                    // YOU WIN
+                    oppo_img.src ="scissors.jpg";
+                    result.innerHTML = "YOU WIN!";
+                    oppo.style.height = "150px";
+                    result.style.color = "white";
+                    result.style.backgroundColor = "green";
+                }
+            }
+            else if(ran == 1 && paper_id == true ){
+                {
+                    // YOU LOSE
+                    oppo_img.src ="scissors.jpg";
+                    result.innerHTML = "YOU LOSE!";
+                    oppo.style.height = "150px";
+                    result.style.color = "white";
+                    result.style.backgroundColor = "red";
+                }
+            }
+            else if(ran == 2 && sci_id == true){
+                {
+                    // YOU WIN
+                    oppo_img.src ="paper.jpg";
+                    result.innerHTML = "YOU WIN!";
+                    oppo.style.height = "150px";
+                    result.style.color = "white";
+                    result.style.backgroundColor = "green";
+                }
+            }
+            else if(ran == 2 && rock_id == true){
+                {
+                    // YOU LOSE
+                    oppo_img.src ="paper.jpg";
+                    result.innerHTML = "YOU LOSE!";
+                    oppo.style.height = "150px";
+                    result.style.color = "white";
+                    result.style.backgroundColor = "red";
+                }
+            }
+            else if(ran == 2 && paper_id == true ){
+                {
+                    // DRAW
+                    oppo_img.src ="paper.jpg";
+                    result.innerHTML = "DRAW!";
+                    oppo.style.height = "150px";
+                    result.style.color = "white";
+                    result.style.backgroundColor = "blue";
+                    
+                }
+            }
+            else if(ran == 3 && sci_id == true){
+                {
+                    // YOU LOSE
+                    oppo_img.src ="rock.jpg";
+                    result.innerHTML = "YOU LOSE!";
+                    oppo.style.height = "150px";
+                    result.style.color = "white";
+                    result.style.backgroundColor = "red";
+                }
+            }
+            else if(ran == 3 && rock_id == true){
+                {
+                    // DRAW
+                    oppo_img.src ="rock.jpg";
+                    result.innerHTML = "DRAW!";
+                    oppo.style.height = "150px";
+                    result.style.color = "white";
+                    result.style.backgroundColor = "blue";
+                }
+            }
+            else if(ran == 3 && paper_id == true ){
+                {
+                    // YOU WIN
+                    oppo_img.src ="rock.jpg";
+                    result.innerHTML = "YOU WIN!";
+                    oppo.style.height = "150px";
+                    result.style.color = "white";
+                    result.style.backgroundColor = "green";
+                }
+            }
+        }
+        scissors.addEventListener("click",selectsci);
+        rock.addEventListener("click",selectrock);
+        paper.addEventListener("click",selectpaper);
+        btn.addEventListener("click",play_game);
+    </script>
+</body>
+</html>
